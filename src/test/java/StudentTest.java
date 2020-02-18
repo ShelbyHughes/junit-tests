@@ -1,36 +1,38 @@
-import org.junit.*;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class StudentTest {
-    Student emptyStudent;
-    Student studentWithOne;
-    Student studentWithMany;
-
-    @Before
-    public void setUp(){
-        emptyStudent = new Student("Jane Doe", 1);
-
-        studentWithOne = new Student("John Deer", 2);
-        studentWithOne.addGrade(98);
-
-        studentWithMany = new Student("Leslie Knope", 3);
-        studentWithMany.addGrade(100);
-        studentWithMany.addGrade(100);
-        studentWithMany.addGrade(100);
-        studentWithMany.addGrade(100);
+    @Test
+    public void testCreateStudent(){
+        Student leslieKnope = new Student(1, "Leslie Knope");
+        Student ronSwanson = null;
+        assertNull(ronSwanson);
+        assertNotNull(leslieKnope);
     }
 
     @Test
-    public void testIsEmpty(){
-        assertTrue(emptyStudent.isEmpty());
-        assertFalse(studentWithOne.isEmpty());
+    public void testStudentFields(){
+        Student benWyatt = new Student(2, "Ben Wyatt");
+        assertSame(2, benWyatt.getId());
+        assertSame("Ben Wyatt", benWyatt.getName());
+        assertSame(0, benWyatt.getGrades().size());
+    }
+
+
+    @Test
+    public void testAddGrade(){
+        Student annPerkins = new Student(3, "Ann Perkins");
+        annPerkins.addGrade(100);
+        assertSame(100, annPerkins.getGrades().get(0));
+        annPerkins.addGrade(90);
+        assertSame(90, annPerkins.getGrades().get(1));
     }
 
     @Test
-    public void testIfNameIsEmpty(){
-        assertNotNull("Student 1's name is not null", emptyStudent.getName());
-        assertNotNull("Student 2's name is not null", studentWithOne.getName());
-        assertNotNull("Student 3's name is not null", studentWithMany.getName());
+    public void testAverageGrade(){
+        Student andyDwyer = new Student(4, "Andy Dwyer");
+        andyDwyer.addGrade(100);
+        andyDwyer.addGrade(80);
+        assertEquals(90, andyDwyer.getGradeAverage(), 0);
     }
-
 }
