@@ -36,3 +36,4 @@ public class StudentTest {
         assertEquals(90, andyDwyer.getGradeAverage(), 0);
     }
 }
+
